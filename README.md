@@ -4,10 +4,27 @@ Installation : git clone or copy the code (clone plz)
 First Repo ! Finally
 
 Features:
-  Scan--
-  Deauth--
-  Deauth flood--
-  Evil twin menu--
-  Sniffing (scapy, wireshark, tcpdump, airodump-ng)--
-  WPS attacks--
-  That's all . THX !
+ 
+  
+  >>Scan
+  
+  >>Deauth
+  
+  >>Deauth flood
+  
+  >>Evil twin menu
+  
+  >>Sniffing (scapy, wireshark, tcpdump, airodump-ng)
+  
+  >>WPS attacks
+  
+  >>That's all . THX !
+
+
+
+
+++ THIS IS IN FRENCH ++
+
+Because im french...
+
+Engish version ?
