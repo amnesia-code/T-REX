@@ -2,7 +2,9 @@ T-REX WIFI TOOLS
 
 
 Un code basé sur python pour tester la securité des wifis
-Installation : git clone https://github.com/amnesia-code/T-REX.git
+Installation : 
+
+git clone https://github.com/amnesia-code/T-REX.git
 
 
 Features:
