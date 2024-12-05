@@ -28,4 +28,5 @@ Features:
 
 
 ++ THIS IS IN FRENCH ++
+
 ++Le script est en français++
