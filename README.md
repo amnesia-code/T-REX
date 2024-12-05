@@ -1,10 +1,11 @@
-# T-REX-WiFi-Tools
-A Python-based script using Scapy to audit wireless networks.
-Installation : git clone or copy the code (clone plz)
-First Repo ! Finally
+T-REX WIFI TOOLS
+
+
+Un code basé sur python pour tester la securité des wifis
+Installation : git clone https://github.com/amnesia-code/T-REX.git
+
 
 Features:
- 
   
   >>Scan
   
@@ -18,13 +19,10 @@ Features:
   
   >>WPS attacks
   
-  >>That's all . THX !
+  >>Et voilà !
 
 
 
 
 ++ THIS IS IN FRENCH ++
-
-Because im french...
-
-Engish version ?
+++Le script est en français++
