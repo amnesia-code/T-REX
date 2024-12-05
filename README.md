@@ -5,6 +5,13 @@ Un code basé sur python pour tester la securité des wifis
 
 Installation : 
 
+python3 -m venv venv
+
+source venv/bin/activate
+
+pip install scapy colorama tqdm
+
+
 git clone https://github.com/amnesia-code/T-REX.git
 
 
