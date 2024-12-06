@@ -114,7 +114,6 @@ def scan_networks(interface):
         return None
 
 def sniff_all_networks(interface):
-    """Sniffing de tous les réseaux WiFi avec affichage des données."""
     clear_console()
     print(Fore.CYAN + Style.BRIGHT + f"Sniffing des réseaux sur {interface}...")
 
@@ -131,7 +130,6 @@ def sniff_all_networks(interface):
         print(Fore.RED + "\nArrêt du sniffing.")
 
 def sniff_single_network(interface, bssid):
-    """Sniffing d'un seul réseau WiFi."""
     clear_console()
     print(Fore.CYAN + Style.BRIGHT + f"Sniffing du réseau {bssid} sur {interface}...")
 
