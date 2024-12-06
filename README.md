@@ -28,6 +28,8 @@ Features:
   >>Sniffing (scapy, wireshark, tcpdump, airodump-ng)
   
   >>WPS attacks
+
+  >>Deauth detect (=> scapy)
   
   >>Et voilà !
 
