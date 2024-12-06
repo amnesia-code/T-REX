@@ -6,6 +6,48 @@ import time
 import subprocess
 from scapy.all import *
 from threading import Thread
+from scapy.all import *
+from scapy.layers.dot11 import Dot11, Dot11Elt, Dot11Beacon, RadioTap
+
+from scapy.all import *
+from scapy.layers.dot11 import Dot11, Dot11Deauth
+import subprocess
+import time
+
+def deauth_detect(interface):
+    print(f"[*] Détection des attaques de désauthentification sur {interface}...")
+    current_channel = 1
+    stop_hopping = False
+
+    def change_channel(channel):
+        subprocess.run(["iwconfig", interface, "channel", str(channel)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)  #loop de changement de canal qui reste sur un canal si ya une deauth dessus
+        print(f"{Fore.BLUE}>>>[*] Changement de canal : {channel}")
+
+    def packet_handler(pkt):
+        nonlocal stop_hopping, current_channel
+        if pkt.haslayer(Dot11Deauth):
+            try:
+                sender = pkt.addr2
+                receiver = pkt.addr1
+                reason = pkt[Dot11Deauth].reason
+                print(f"{Fore.RED}{Style.BRIGHT}>>>[ALERT] Deauth détectée! Source: {sender},Destination: {receiver}, Raison: {reason}, Canal: {current_channel}")
+                stop_hopping = True
+            except Exception as e:
+                print(f"{Fore.RED}Erreur lors de la lecture d'un paquet : {e}")
+
+    try:
+        while True:
+            if not stop_hopping:
+                change_channel(current_channel)
+                current_channel = current_channel + 1 if current_channel < 13 else 1
+            else:
+                print(f"{Fore.GREEN}>>>[INFO] Attaque détectée, reste sur le canal {current_channel}")
+
+            sniff(iface=interface, prn=packet_handler, timeout=2, store=False)
+    except KeyboardInterrupt:
+        print(">>>[*] Arrêt de la détection.")
+    except Exception as e:
+        print(f"{Fore.RED}[ERROR] Problème lors de l'exécution : {e}")
 
 def check_tool(tool_name):
     global tools_missing
@@ -108,13 +150,14 @@ def scan_networks(interface):
         choice = int(input(Fore.CYAN + "Entrez le numéro du réseau : ")) - 1
         selected_bssid = list(networks.keys())[choice]
         print(Fore.YELLOW + f"Info sur le réseau:\nSSID: {networks[selected_bssid]['SSID']}\nBSSID: {selected_bssid}\nChannel: {networks[selected_bssid]['Channel']}")
+        print("Retour au menu principal dans 10 secondes...")
+        time.sleep(10)
         return networks[selected_bssid]["SSID"], selected_bssid, networks[selected_bssid]["Channel"]
     except (ValueError, IndexError):
         print(Fore.RED + "Choix invalide.")
         return None
 
 def sniff_all_networks(interface):
-    """Sniffing de tous les réseaux WiFi avec affichage des données."""
     clear_console()
     print(Fore.CYAN + Style.BRIGHT + f"Sniffing des réseaux sur {interface}...")
 
@@ -131,7 +174,6 @@ def sniff_all_networks(interface):
         print(Fore.RED + "\nArrêt du sniffing.")
 
 def sniff_single_network(interface, bssid):
-    """Sniffing d'un seul réseau WiFi."""
     clear_console()
     print(Fore.CYAN + Style.BRIGHT + f"Sniffing du réseau {bssid} sur {interface}...")
 
@@ -246,7 +288,7 @@ def main_menu(interface):
             Fore.BLUE +
             "   Menu Principal !\n"
             "   >>> 0 => Mettre l'interface en mode moniteur\n"
-            "   >>> 00 => Mettre l'interface en mode normal\n"
+            "   >>> 00=> Mettre l'interface en mode normal\n"
             "   >>> 1 => Scanner les WiFi\n"
             "   >>> 2 => Tenter un bruteforce WPS (=> Avec reaver)\n"
             "   >>> 3 => Menu Evil Twin\n"
@@ -255,6 +297,7 @@ def main_menu(interface):
             "   >>> 6 => Sniffing d'un seul réseau (=> Avec Scapy\n"
             "   >>> 7 => Sniffing avancé (Tcpdump / Wireshark / Airodump-ng)\n"
             "   >>> 8 => Deauth flood (=> Envoie de paquets deauth a tout les wifi, sur tout les canaux)\n"
+            "   >>> 9 => Détecter les attaques deauth\n"
             "   >>> 99 => Quitter\n"+
             Fore.GREEN + Style.BRIGHT + Back.BLACK + "[CHOIX]>>> "
         )
@@ -264,6 +307,9 @@ def main_menu(interface):
         elif choice == "00":
             interface = put_interface_in_normal_mode(interface)
         elif choice == "1":
+            print("Début du scan...")
+            time.sleep(2)
+            clear_console()
             scan_network = scan_networks(interface)
         elif choice == "2":
             wps_bruteforce(interface)
@@ -299,6 +345,10 @@ def main_menu(interface):
             print(Fore.RED + Back.BLACK + "Starting...")
             time.sleep(1)
             deauth_flood_all(interface)
+        elif choice == "9":
+            print("Lancement de la surveillance...")
+            time.sleep(1)
+            deauth_detect(interface)
         elif choice == "99":
             print(Fore.GREEN + "Salut !")
             break
