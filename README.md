@@ -1,5 +1,7 @@
 T-REX WIFI TOOLS
 
+Added this english version !!!
+
 
 Un code basé sur python pour tester la securité des wifis
 
@@ -30,12 +32,14 @@ Features:
   >>WPS attacks
 
   >>Deauth detect (=> scapy)
+
+  >>Beacons spamm
   
   >>Et voilà !
+  >>Thats all !
 
 
 
 
-++ THIS IS IN FRENCH ++
 
-++Le script est en français++
+
