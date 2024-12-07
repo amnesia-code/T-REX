@@ -9,7 +9,7 @@ python3 -m venv venv
 
 source venv/bin/activate
 
-pip install scapy colorama tqdm
+pip install scapy colorama tqdm pyfiglet thread
 
 
 git clone https://github.com/amnesia-code/T-REX.git
@@ -28,6 +28,8 @@ Features:
   >>Sniffing (scapy, wireshark, tcpdump, airodump-ng)
   
   >>WPS attacks
+
+  >>Deauth detect (=> scapy)
   
   >>Et voilà !
 
