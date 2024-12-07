@@ -9,7 +9,7 @@ python3 -m venv venv
 
 source venv/bin/activate
 
-pip install scapy colorama tqdm
+pip install scapy colorama tqdm pyfiglet thread
 
 
 git clone https://github.com/amnesia-code/T-REX.git
