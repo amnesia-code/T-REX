@@ -1,4 +1,4 @@
-#T-REX WIFI TOOLS
+# T-REX WIFI TOOLS
 
 __Added this english version !!!__
 
@@ -19,7 +19,7 @@ pip install scapy colorama tqdm pyfiglet thread
 git clone https://github.com/amnesia-code/T-REX.git
 
 
-##Features:
+## Features:
   
   >>Scan
   
