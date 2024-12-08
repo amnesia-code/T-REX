@@ -1,11 +1,12 @@
-T-REX WIFI TOOLS
+#T-REX WIFI TOOLS
 
-Added this english version !!!
+__Added this english version !!!__
 
 
-Un code basé sur python pour tester la securité des wifis
+**Un code basé sur python pour tester la securité des wifis**
+**A Python-based code to audit wireless networks.**
 
-Installation : 
+##**Installation :**
 
 python3 -m venv venv
 
@@ -17,7 +18,7 @@ pip install scapy colorama tqdm pyfiglet thread
 git clone https://github.com/amnesia-code/T-REX.git
 
 
-Features:
+##**Features:**
   
   >>Scan
   
